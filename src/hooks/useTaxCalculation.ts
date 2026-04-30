@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { fetchTaxBrackets } from '../api/taxApi'
 import { calculateTaxes } from '../domain/calcualateTaxes'
+import type{ TaxCalculationResult } from '../domain/types'
 
 export function useTaxCalculation() {
-    const [result, setResult] = useState<number | null>(null)
+    const [result, setResult] = useState<TaxCalculationResult | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
