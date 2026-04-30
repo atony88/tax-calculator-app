@@ -3,3 +3,7 @@ export type TaxBracket = {
     max: number
     rate: number
 }
+
+export type TaxBracketsResponse = {
+  tax_brackets: TaxBracket[]
+}
