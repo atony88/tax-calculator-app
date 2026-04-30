@@ -136,7 +136,7 @@ function App() {
         )}
       </section>
 
-      <footer className='mt-6 text-center text-sm text-slate-700'>
+      <footer className='mt-6 text-center text-sm text-slate-200'>
         Built with care by Arezoo Tony
       </footer>
     </main>

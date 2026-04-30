@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# Tax Calculator – Take-Home Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This app calculates income tax based on a salary and tax year using marginal tax rates.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+It fetches tax brackets from the provided API and shows:
 
-## React Compiler
+* Total tax owed
+* Effective tax rate
+* Tax breakdown per bracket
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* React + TypeScript (Vite)
+* React Hook Form
+* Tailwind CSS
+* Vitest
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Running the App
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Start API (Docker)
+
+```bash
+docker pull ptsdocker16/interview-test-server
+docker run --init -p 5001:5001 -it ptsdocker16/interview-test-server
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
+
+## Live Demo
+
+You can view the UI here:
+https://tax-calculator-app-beige.vercel.app/
+
+⚠️ Note:
+The API runs locally via Docker (as provided in the assignment).
+To fully test the application, please run:
+
+```bash
+docker run --init -p 5001:5001 -it ptsdocker16/interview-test-server
+```
+
+---
+
+## Features
+
+* Input income and tax year
+* Fetch tax brackets from API
+* Handles API failures with retry
+* Shows:
+
+  * Total tax
+  * Effective rate
+  * Tax per band
+* Basic form validation
+* Error handling
+
+---
+
+## Project Structure
+
+```txt
+src/
+  api/      → API calls
+  domain/   → tax calculation logic
+  hooks/    → connects API + logic
+```
+
+---
+
+## Approach
+
+* Kept calculation logic as a pure function for easier testing
+* Separated API logic from UI
+* Used a custom hook to keep the component simple
+* Added basic validation and error handling
+* Handled API instability with retries
+
+---
+
+## Testing
+
+* Unit tests added for tax calculation
+* Covers the required scenarios:
+
+  * $0
+  * $50,000
+  * $100,000
+  * $1,234,567
+
+---
+
+## Notes
+
+* Rounded values to avoid floating point issues
+* Only supports years 2019–2022
+* API can fail randomly, so retries are implemented
+
+---
+
+## Author
+
+Arezoo Tony
