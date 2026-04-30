@@ -37,8 +37,11 @@ export function calculateTaxes(
     }
   }
 
+  const roundedTotalTax = Number(totalTax.toFixed(2))
+
+
   return {
-    totalTax,
+    totalTax: roundedTotalTax,
     effectiveRate: totalTax / income,
     bands,
   }

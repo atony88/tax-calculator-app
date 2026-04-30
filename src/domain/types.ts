@@ -1,6 +1,6 @@
 export type TaxBracket = {
     min: number
-    max: number
+    max?: number
     rate: number
 }
 
